@@ -8,3 +8,11 @@ Trabalho da disciplina Estrutura de Dados 2, sobre Algoritmo de Huffman.
  A implementação consiste num TAD opaco– implementar em linguagem
  C– cujo ponto de partida pode ser a ED de árvore binária apresentada no
  curso. 
+
+## Organização de projeto
+### Pasta "/include
+Pasta onde deverá ser inserido todos os documentos com a extensão ".h". Incluindo a definição de funções úteis e TADs.
+
+- arvoreBin.h -> Definição da TAD de árvore binária, usada como base para a implementação da árvore de Huffman.  
+
+- tabelaFrequencia.h -> Funções utilizadas para a criação da tabela de frequência, array que contém quantas vezes um determinado caracter "apareceu" no texto.
