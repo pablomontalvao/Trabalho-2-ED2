@@ -3,12 +3,13 @@
 #include <locale.h>
 #include "arvoreBin.h"
 #include "tabelaFrequencia.h"
+#include "listaEncadeadaOrdenada.h"
 
 /*
-Definindo etapas: 
+Definindo etapas:
 1- Ler o txt e gerar tabela de frequencia de letras (hash table) - Ok
 2- gerar fila com os nós da árvore, ordenada por frequência (nó -> caracter, frequencia, esq, dir, prox) - Ok
-3- gerar a árvore de huffman 
+3- gerar a árvore de huffman
 4- gerar tabela de codificação (matriz de string)
 5- codificar o texto
 6- decodificar o texto
@@ -34,7 +35,7 @@ int main()
     unsigned char texto[] = "texto a ser compactado"; //será substituido por um arquivo lido
     unsigned int tabelaFrequencia [TAM];
 
-  
+
 /*
     do {
         interfaceUsuario();
