@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct NO* ArvBin;
+
 
 ArvBin* cria_ArvBin();
 void libera_ArvBin(ArvBin *raiz);
@@ -15,12 +15,79 @@ void preOrdem_ArvBin(ArvBin *raiz);
 void emOrdem_ArvBin(ArvBin *raiz);
 void posOrdem_ArvBin(ArvBin *raiz);
 
-struct NO{
-	int info;
-	struct NO *esq;
-	struct NO *dir;
-};
+typedef struct no{
+	unsigned char caracter;
+	int freq;
+	struct no *esq, *dir, *prox;
+}No;
 
+typedef struct lista{
+    No *inicio;
+    int tam;
+}Lista;
+
+No* ArvBin;
+
+
+void criaLista(Lista *li){
+    li->inicio = NULL;
+    li->tam = 0;
+}
+
+void insereOrdenado(Lista *li, No *no){
+    No *aux;
+    //se a lista esta vazia
+    if(li->inicio == NULL){
+        li->inicio = no;
+    }
+    //tem freq menor que o inicio
+    else if(no->freq < li->inicio->freq){
+        no->prox = li->inicio;
+        li->inicio = no;
+    }
+    else{
+        aux = li->inicio;
+        while(aux->proximo && aux->prox->freq <= no->freq)
+            aux = aux->prox;
+        no->prox = aux->prox;
+        aux->prox = no;
+    }
+
+    li->tam++;
+}
+
+void preencheLista(unsigned int tab[], Lista *li){
+    No *newNo;
+    for(int i = 0; i < TAM; i++){
+        if(tab[i] > 0){
+            newNo = malloc(sizeof(No));
+            if(newNo){
+                newNo->caracter = i;
+                newNo->freq = tab[i];
+                newNo->dir = NULL;
+                newNo->esq = NULL;
+                newNo->prox = NULL;
+
+                insereOrdenado(li, newNo);
+            }
+            else{
+                printf("\nErro no preenchimento da lista\n");
+                break;
+            }
+        }
+    }
+
+void imprimeLista(Lista *li){
+    No *aux = li->inicio;
+
+    printf("\nTamanho lista:%d \n", li->tam);
+    while(aux){
+        printf("\nCaracter: %c Frequencia:%d", aux->caracter, aux->freq);
+        aux = aux->prox;
+    }
+
+
+}
 ArvBin* cria_ArvBin(){
 	ArvBin* raiz = (ArvBin*) malloc(sizeof(ArvBin));
 	if(raiz != NULL)
@@ -28,7 +95,7 @@ ArvBin* cria_ArvBin(){
 	return raiz;
 }
 
-void libera_NO(struct NO* no){
+void libera_NO(struct no* no){
 	if(no == NULL)
 		return;
 	libera_NO(no->esq);
@@ -131,89 +198,5 @@ int consulta_ArvBin(ArvBin *raiz, int valor){
 	return 0;
 }
 
-struct NO* remove_atual(struct NO* atual) {
-	struct NO *no1, *no2;
 
-	// Sem filho da esquerda. Apontar para o filho da direita (trata n� folha e n� com 1 filho).
-	if (atual->esq == NULL){
-		no2 = atual->dir;
-		free(atual);
-		return no2;
-	}
 
-	// Procura filho mais � direita na sub-�rvore da esquerda.
-	no1 = atual;
-	no2 = atual->esq;
-	while (no2->dir != NULL){
-		no1 = no2;
-		no2 = no2->dir;
-	}
-
-	// Copia o filho mais � direita na sub-�rvore da esquerda para o lugar do n� removido.
-	if (no1 != atual){
-		no1->dir = no2->esq;
-		no2->esq = atual->esq;
-	}
-	no2->dir = atual->dir;
-
-	free(atual);
-	return no2;
-}
-// http://www.ime.usp.br/~pf/algoritmos/aulas/binst.html
-int remove_ArvBin(ArvBin *raiz, int valor){
-	if (raiz == NULL)
-		return 0;
-	struct NO* ant = NULL;
-	struct NO* atual = *raiz;
-	while (atual != NULL){
-        //Achou o n� a ser removido. Tratar o tipo de remo��o.
-		if (valor == atual->info){
-			if (atual == *raiz)
-				*raiz = remove_atual(atual);
-			else{
-				if (ant->dir == atual)
-					ant->dir = remove_atual(atual);
-				else
-					ant->esq = remove_atual(atual);
-			}
-			return 1;
-		}
-		// Continua buscando na �rvore n� a ser removido
-		ant = atual;
-		if (valor > atual->info)
-			atual = atual->dir;
-		else
-			atual = atual->esq;
-	}
-	return 0;
-}
-
-void preOrdem_ArvBin(ArvBin *raiz){
-	if(raiz == NULL)
-		return;
-	if(*raiz != NULL){
-		printf("%d\n",(*raiz)->info);
-		preOrdem_ArvBin(&((*raiz)->esq));
-		preOrdem_ArvBin(&((*raiz)->dir));
-	}
-}
-
-void emOrdem_ArvBin(ArvBin *raiz){
-	if(raiz == NULL)
-		return;
-	if(*raiz != NULL){
-		emOrdem_ArvBin(&((*raiz)->esq));
-		printf("%d\n",(*raiz)->info);
-		emOrdem_ArvBin(&((*raiz)->dir));
-	}
-}
-
-void posOrdem_ArvBin(ArvBin *raiz){
-	if(raiz == NULL)
-		return;
-	if(*raiz != NULL){
-		posOrdem_ArvBin(&((*raiz)->esq));
-		posOrdem_ArvBin(&((*raiz)->dir));
-		printf("%d\n",(*raiz)->info);
-	}
-}
