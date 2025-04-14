@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "arvoreBin.h"
+#define TAM 256 //tamanho tabela ASCII
 
+/*
+Definindo etapas: 
+1- Ler o txt e gerar tabela de frequencia de letras (hash table)
+2- gerar fila com os nós da árvore, ordenada por frequência (nó -> caracter, frequencia, esq, dir, prox)
+3- gerar a árvore de huffman 
+4- gerar tabela de codificação (matriz de string)
+5- codificar o texto
+6- decodificar o texto
+7- comparar os arquivos original e compactado
+*/
 
 void interfaceUsuario(){
     printf("\n\n============================================\n");
@@ -18,7 +30,8 @@ void interfaceUsuario(){
 int main()
 {
     int opcao;
-
+    unsigned char texto = "texto a ser compactado"; //será substituido por um arquivo lido
+    unsigned int frequenceTable [TAM];
     do {
         interfaceUsuario();
         scanf("%d",&opcao);
