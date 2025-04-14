@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <stdio.h>
+#define TAM 256
+
 typedef struct no{
 	unsigned char caracter;
 	int freq;
@@ -27,7 +31,7 @@ void insereOrdenado(Lista *li, No *no){
     }
     else{
         aux = li->inicio;
-        while(aux->proximo && aux->prox->freq <= no->freq)
+        while(aux->prox && aux->prox->freq <= no->freq)
             aux = aux->prox;
         no->prox = aux->prox;
         aux->prox = no;
@@ -40,7 +44,7 @@ void preencheLista(unsigned int tab[], Lista *li){
     No *newNo;
     for(int i = 0; i < TAM; i++){
         if(tab[i] > 0){
-            newNo = malloc(sizeof(No));
+            newNo = (No*)malloc(sizeof(No));
             if(newNo){
                 newNo->caracter = i;
                 newNo->freq = tab[i];
@@ -56,6 +60,7 @@ void preencheLista(unsigned int tab[], Lista *li){
             }
         }
     }
+}
 
 void imprimeLista(Lista *li){
     No *aux = li->inicio;
