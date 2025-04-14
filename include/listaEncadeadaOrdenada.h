@@ -2,12 +2,20 @@
 #include <stdio.h>
 #define TAM 256
 
+/*
+criar_lista(&lista);
+preenche_lista(tabelaFrequencia, &lista);
+imprime_lista(&lista);
+*/
+
+// estrutura do nó da lista encadeada
 typedef struct no{
 	unsigned char caracter;
 	int freq;
 	struct no *esq, *dir, *prox;
 }No;
 
+// estrutura da lista encadeada
 typedef struct lista{
     No *inicio;
     int tam;
