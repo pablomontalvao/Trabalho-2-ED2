@@ -36,6 +36,22 @@ int main()
     unsigned int tabelaFrequencia [TAM];
 
 
+
+    // Passo 3: Construir a árvore de Huffman
+    NoArvore* raiz = construirArvoreHuffman(lista);
+
+    // Passo 4: Gerar códigos binários para cada caractere
+    char* tabelaCodigos[256] = {0}; // Vetor de strings com os códigos
+    char codigo[256]; // Buffer auxiliar
+    gerarCodigos(raiz, codigo, 0, tabelaCodigos);
+
+    // Exibir os códigos Huffman gerados
+    printf("Tabela de Códigos Huffman:\n");
+    for (int i = 0; i < 256; i++) {
+        if (tabelaCodigos[i] != NULL) {
+            printf("'%c' (%d): %s\n", i, i, tabelaCodigos[i]);
+        }
+    }    
 /*
     do {
         interfaceUsuario();
