@@ -4,6 +4,7 @@
 #include "arvoreBin.h"
 #include "tabelaFrequencia.h"
 #include "listaEncadeadaOrdenada.h"
+#include "codificacaoHuffman.h"
 
 /*
 Definindo etapas:
@@ -32,9 +33,16 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese"); //para acentuação
     int opcao;
-    unsigned char texto[] = "texto a ser compactado"; //será substituido por um arquivo lido
-    unsigned int tabelaFrequencia [TAM];
-
+    unsigned char texto[] = "texto a ser compactado"; // temporário
+    unsigned int tabelaFrequencia[TAM];
+    inicializaTabelaFrequencia(tabelaFrequencia);
+    preencheTabelaFrequencia(texto, tabelaFrequencia);
+    
+    Lista lista;
+    criaLista(&lista);
+    preencheLista(tabelaFrequencia, &lista);
+    
+    No *raiz = construirArvoreHuffman(&lista);
 
 
     // Passo 3: Construir a árvore de Huffman
