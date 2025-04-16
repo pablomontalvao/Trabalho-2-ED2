@@ -79,3 +79,34 @@ void imprimeLista(Lista *li){
         aux = aux->prox;
     }
 }
+
+No* construirArvoreHuffman(Lista *li) {
+    while (li->tam > 1) {
+        // Remove os dois primeiros nós de menor frequência
+        No *esq = li->inicio;
+        No *dir = esq->prox;
+
+        // Remove da lista
+        li->inicio = dir->prox;
+        li->tam -= 2;
+
+        // Cria novo nó combinando os dois
+        No *novo = (No *)malloc(sizeof(No));
+        if (!novo) {
+            printf("Erro ao alocar nó da árvore de Huffman.\n");
+            return NULL;
+        }
+
+        novo->caracter = '*'; // caractere genérico para nós internos
+        novo->freq = esq->freq + dir->freq;
+        novo->esq = esq;
+        novo->dir = dir;
+        novo->prox = NULL;
+
+        // Insere novamente na lista de forma ordenada
+        insereOrdenado(li, novo);
+    }
+
+    // No final, o único nó restante é a raiz da árvore
+    return li->inicio;
+}
