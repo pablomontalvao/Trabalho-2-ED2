@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include "arvoreBin.h"
-#include "tabelaFrequencia.h"
-#include "listaEncadeadaOrdenada.h"
+#include "../include/tabelaFrequencia.h"
+#include "../include/listaEncadeadaOrdenada.h"
 
 /*
 Definindo etapas:
@@ -31,9 +30,17 @@ void interfaceUsuario(){
 int main()
 {
     setlocale(LC_ALL, "Portuguese"); //para acentuação
-    int opcao;
+    //int opcao;
     unsigned char texto[] = "texto a ser compactado"; //será substituido por um arquivo lido
     unsigned int tabelaFrequencia [TAM];
+    Lista lista;
+
+    criaLista(&lista); 
+    inicializaTabelaFrequencia(tabelaFrequencia);
+    preencheTabelaFrequencia(texto, tabelaFrequencia);
+
+    preencheLista(tabelaFrequencia, &lista);
+    imprimeLista(&lista);
 
 
 /*
