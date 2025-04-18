@@ -2,7 +2,7 @@
 #ifndef LISTA_ENCADEADA_ORDENADA_H
 #define LISTA_ENCADEADA_ORDENADA_H
 
-#include "arvoreBin.h"
+#include "arvoreHuff.h"
 
 // Estrutura de um nó da lista encadeada
 typedef struct Celula {

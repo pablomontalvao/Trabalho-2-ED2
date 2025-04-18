@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tabelaFrequencia.h"
+#include "../include/tabelaFrequencia.h"
 
 TabelaFrequencia* criarTabelaFrequencia() {
     TabelaFrequencia* tabela = (TabelaFrequencia*)malloc(sizeof(TabelaFrequencia));
@@ -17,11 +17,7 @@ void gerarTabelaFrequencia(FILE* arquivo, int* frequencias) {
 }
 
 void limparTabelaFrequencia(TabelaFrequencia* tabela) {
-    for (int i = 0; i < TAMANHO_ALFABETO; i++) {
+    for (int i = 0; i < TAM; i++) {
         tabela->frequencias[i] = 0;
     }
-}
-
-void destruirTabela(TabelaFrequencia* tabela) {
-    free(tabela);
 }

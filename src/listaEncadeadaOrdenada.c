@@ -1,5 +1,5 @@
 // listaEncadeadaOrdenada.c
-#include "listaEncadeadaOrdenada.h"
+#include "../include/listaEncadeadaOrdenada.h"
 #include <stdio.h>
 #include <stdlib.h>
 

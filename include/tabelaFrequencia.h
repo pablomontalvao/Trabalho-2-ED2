@@ -1,15 +1,15 @@
 #ifndef TABELAFREQUENCIA_H
 #define TABELAFREQUENCIA_H
-
-#define TAMANHO_ALFABETO 256
+#include <stdlib.h>
+#include <stdio.h>
+#define TAM 256
 
 typedef struct {
-    int frequencias[TAMANHO_ALFABETO];
+    int frequencias[TAM];
 } TabelaFrequencia;
 
 TabelaFrequencia* criarTabelaFrequencia();
 void gerarTabelaFrequencia(FILE* arquivo, int* frequencias);
 void limparTabelaFrequencia(TabelaFrequencia* tabela);
-void destruirTabela(TabelaFrequencia* tabela);
 
 #endif
